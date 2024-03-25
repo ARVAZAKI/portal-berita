@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('role');
-            $table->foreign('role')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('role', ['admin', 'users']);
+            $table->timestamps();
         });
     }
 

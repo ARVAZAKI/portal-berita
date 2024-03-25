@@ -18,8 +18,6 @@ return new class extends Migration
             $table->date('upload_date');
             $table->unsignedBigInteger('post_by');
             $table->foreign('post_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('news_category');
-            $table->foreign('news_category')->references('id')->on('news_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

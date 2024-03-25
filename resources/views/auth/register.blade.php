@@ -61,8 +61,18 @@
           <!-- Register Card -->
           <div class="card">
             <div class="card-body">
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{$error}}</li>
+                  @endforeach
+                </ul>
+              </div>
+          @endif
               <h4 class="mb-2">Adventure starts here 🚀</h4>
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form id="formAuthentication" class="mb-3" action="/auth-register" method="POST">
+                @csrf
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
                   <input

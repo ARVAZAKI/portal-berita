@@ -64,7 +64,9 @@
           >
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
+              <form action="/search" method="POST">
+                @csrf
+                <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
                   <input
@@ -72,9 +74,12 @@
                     class="form-control border-0 shadow-none"
                     placeholder="Search..."
                     aria-label="Search..."
+                    name="query"
                   />
                 </div>
               </div>
+              </form>
+              
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -85,7 +90,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="../assets/img/avatars/profil.jpeg" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -94,12 +99,11 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="../assets/img/avatars/profil.jpeg" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                          <div class="d-flex justify-content-center align-items-center">
+                            <span class="fw-semibold d-block">{{ Auth::user()->username }}</span>
                           </div>
                         </div>
                       </a>
@@ -108,7 +112,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-basic.html">
+                      <a class="dropdown-item" href="/logout">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -120,38 +124,16 @@
             </div>
           </nav>
           <div class="container">
+            @foreach ($news as $item)
             <div class="card mt-2">
               <div class="card-body">
-                <h2>Ini judul berita</h2>
-                <h5>Category : Politik <br> by : admin</h5>
-                <p>2023-12-22</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, aut? Nemo praesentium, quis error animi quos magnam at non suscipit exercitationem doloribus veniam, ab inventore repellendus quasi dolor. Optio impedit nesciunt, deleniti omnis non asperiores, eius vero odit vitae ullam iure expedita obcaecati ducimus minus laborum cum quae a saepe necessitatibus aperiam beatae? Sunt animi numquam, quibusdam accusamus accusantium, ut atque hic minima officiis veritatis blanditiis quod molestias maiores corporis eos laudantium culpa voluptatibus porro dolorem rem perspiciatis iste sequi? Dignissimos aspernatur earum, voluptatum nobis doloribus consequuntur mollitia nisi consectetur maiores blanditiis reiciendis, recusandae quidem ad rerum exercitationem assumenda autem!</p>
+                <h2>{{ $item->title }}</h2>
+                <p>written by : {{$item->user->username}}</p>
+                <p>upload date : {{ $item->upload_date }}</p>
+                <p>{{$item->content}}</p>
               </div>
             </div>
-            <div class="card mt-2">
-              <div class="card-body">
-                <h2>Ini judul berita</h2>
-                <h5>Category : Politik <br> by : admin</h5>
-                <p>2023-12-22</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, aut? Nemo praesentium, quis error animi quos magnam at non suscipit exercitationem doloribus veniam, ab inventore repellendus quasi dolor. Optio impedit nesciunt, deleniti omnis non asperiores, eius vero odit vitae ullam iure expedita obcaecati ducimus minus laborum cum quae a saepe necessitatibus aperiam beatae? Sunt animi numquam, quibusdam accusamus accusantium, ut atque hic minima officiis veritatis blanditiis quod molestias maiores corporis eos laudantium culpa voluptatibus porro dolorem rem perspiciatis iste sequi? Dignissimos aspernatur earum, voluptatum nobis doloribus consequuntur mollitia nisi consectetur maiores blanditiis reiciendis, recusandae quidem ad rerum exercitationem assumenda autem!</p>
-              </div>
-            </div>
-            <div class="card mt-2">
-              <div class="card-body">
-                <h2>Ini judul berita</h2>
-                <h5>Category : Politik <br> by : admin</h5>
-                <p>2023-12-22</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, aut? Nemo praesentium, quis error animi quos magnam at non suscipit exercitationem doloribus veniam, ab inventore repellendus quasi dolor. Optio impedit nesciunt, deleniti omnis non asperiores, eius vero odit vitae ullam iure expedita obcaecati ducimus minus laborum cum quae a saepe necessitatibus aperiam beatae? Sunt animi numquam, quibusdam accusamus accusantium, ut atque hic minima officiis veritatis blanditiis quod molestias maiores corporis eos laudantium culpa voluptatibus porro dolorem rem perspiciatis iste sequi? Dignissimos aspernatur earum, voluptatum nobis doloribus consequuntur mollitia nisi consectetur maiores blanditiis reiciendis, recusandae quidem ad rerum exercitationem assumenda autem!</p>
-              </div>
-            </div>
-            <div class="card mt-2">
-              <div class="card-body">
-                <h2>Ini judul berita</h2>
-                <h5>Category : Politik <br> by : admin</h5>
-                <p>2023-12-22</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, aut? Nemo praesentium, quis error animi quos magnam at non suscipit exercitationem doloribus veniam, ab inventore repellendus quasi dolor. Optio impedit nesciunt, deleniti omnis non asperiores, eius vero odit vitae ullam iure expedita obcaecati ducimus minus laborum cum quae a saepe necessitatibus aperiam beatae? Sunt animi numquam, quibusdam accusamus accusantium, ut atque hic minima officiis veritatis blanditiis quod molestias maiores corporis eos laudantium culpa voluptatibus porro dolorem rem perspiciatis iste sequi? Dignissimos aspernatur earum, voluptatum nobis doloribus consequuntur mollitia nisi consectetur maiores blanditiis reiciendis, recusandae quidem ad rerum exercitationem assumenda autem!</p>
-              </div>
-            </div>
+            @endforeach
           </div>
 
             <div class="content-backdrop fade"></div>
