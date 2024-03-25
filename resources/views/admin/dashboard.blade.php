@@ -1,7 +1,13 @@
 @extends('admin.layouts')
+@section('title','dashboard')
 @section('content')
-     <!-- Basic Bootstrap Table -->
+     @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
      <div class="card">
+        
         <h5 class="card-header">News Table</h5>
         <div class="table-responsive text-nowrap">
           <table class="table">
@@ -14,14 +20,16 @@
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
+                @foreach ($news as $item)
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->title }}</td>
+                <td>{{ $item->upload_date }}</td>
+                <td>
+                    <a href="{{ route('delete',$item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
               </tr>
-              
-              
+                @endforeach
             </tbody>
           </table>
         </div>

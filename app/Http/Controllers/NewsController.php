@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class NewsController extends Controller
 {
     public function index(){
-        $news = News::with('user')->get();
+        $news = News::with('user')->orderBy('upload_date','desc')->get();
         return view('users.news',compact('news'));
     }
     public function search(Request $request){
@@ -18,6 +18,19 @@ class NewsController extends Controller
         }
         $news = News::where('title', 'LIKE', '%' . $request->input('query') . '%')->get();
         return view('users.news',compact('news'));
+    }
+    public function addNews(Request $request){
+        $request->validate([
+            'title' => ['required'],
+            'content' => ['required'],
+        ]);
+        News::create([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'post_by' => Auth::user()->id,
+            'upload_date' => now()
+        ]);
+        return redirect()->back()->with('message','berhasil menambah data...');
     }
     
 }

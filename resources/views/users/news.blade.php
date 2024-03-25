@@ -95,7 +95,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="/news">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -123,7 +123,7 @@
               </ul>
             </div>
           </nav>
-          <div class="container">
+          <div class="container mb-5">
             @foreach ($news as $item)
             <div class="card mt-2">
               <div class="card-body">
