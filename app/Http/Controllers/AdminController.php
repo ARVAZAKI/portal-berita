@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function dashboard(){
-        $news = News::where('post_by',Auth::user()->id)->get();
+        $news = News::where('post_by',Auth::user()->id)->orderBy('created_at','desc')->get();
         return view('admin.dashboard',compact('news'));
     }
   
@@ -18,7 +18,7 @@ class AdminController extends Controller
         return redirect()->back()->with('message','delete data successfully...');
     }
     public function news(){
-        $news = News::with('user')->orderBy('upload_date','desc')->get();
+        $news = News::with('user')->orderBy('created_at','desc')->get();
         return view('admin.news',compact('news'));
     }
    public function addNews(){

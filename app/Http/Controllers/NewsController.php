@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class NewsController extends Controller
 {
     public function index(){
-        $news = News::with('user')->orderBy('upload_date','desc')->get();
+        $news = News::with('user')->orderBy('created_at','desc')->get();
         return view('users.news',compact('news'));
     }
     public function search(Request $request){
