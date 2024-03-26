@@ -29,11 +29,11 @@ Route::get('/news',[NewsController::class, "index"])->middleware('auth');
 Route::post('/search',[NewsController::class, "search"]);
 
 //route admin
-Route::get('/dashboard',[AdminController::class, "dashboard"])->middleware('auth');
-Route::get('/delete/{id}',[AdminController::class, "delete"])->name('delete');
-Route::get('/admin-news',[AdminController::class, "news"])->middleware('auth');
-Route::get('/add-news',[AdminController::class, "addNews"])->middleware('auth');
-Route::post('/upload-news',[NewsController::class, "addNews"]);
+Route::get('/dashboard',[AdminController::class, "dashboard"])->middleware(['auth','mustAdmin']);
+Route::get('/delete/{id}',[AdminController::class, "delete"])->name('delete')->middleware(['auth','mustAdmin']);
+Route::get('/admin-news',[AdminController::class, "news"])->middleware(['auth','mustAdmin']);
+Route::get('/add-news',[AdminController::class, "addNews"])->middleware(['auth','mustAdmin']);
+Route::post('/upload-news',[NewsController::class, "addNews"])->middleware(['auth','mustAdmin']);
 
 
 

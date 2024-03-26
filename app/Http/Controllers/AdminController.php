@@ -12,16 +12,16 @@ class AdminController extends Controller
         $news = News::where('post_by',Auth::user()->id)->orderBy('created_at','desc')->get();
         return view('admin.dashboard',compact('news'));
     }
-  
-    public function delete($id){
-        News::findOrFail($id)->delete();
-        return redirect()->back()->with('message','delete data successfully...');
-    }
     public function news(){
         $news = News::with('user')->orderBy('created_at','desc')->get();
         return view('admin.news',compact('news'));
     }
-   public function addNews(){
-    return view('admin.addnews');
-   }
+    public function addNews(){
+        return view('admin.addnews');
+    } 
+   
+    public function delete($id){
+        News::findOrFail($id)->delete();
+        return redirect()->back()->with('message','delete data successfully...');
+    }
 }
